@@ -2,6 +2,7 @@
 
 echo "Install haskell Platform"
 sudo apt install haskell-platform -y
+sudo apt-get install freeglut3-dev
 
 echo "Install Stack"
 curl -sSL https://get.haskellstack.org/ | sh
