@@ -8,8 +8,8 @@ render :: PongGame -> Picture
 render game = pictures
     [ball
     , walls
-    , mkPaddle rose 120 $ player1 game
-    , mkPaddle orange (-120) $ player2 game
+    , mkPaddle rose 230 $ player1 game
+    , mkPaddle orange (-230) $ player2 game
     ]
     where
         ball = uncurry translate (ballLoc game) $ color ballColor $ circleSolid 10
@@ -19,10 +19,10 @@ wall :: Float -> Picture
 wall offset = 
     translate 0 offset $
         color wallColor $
-            rectangleSolid 270 10
+            rectangleSolid 480 20
 
 wallColor = greyN 0.5
-walls = pictures [wall 150, wall (-150)]
+walls = pictures [wall 250, wall (-250)]
 
 mkPaddle :: Color -> Float -> Float -> Picture
 mkPaddle col x y = pictures

@@ -6,8 +6,8 @@ background :: Color
 background = black
 
 width, height, offset :: Int
-width = 300
-height = 300
+width = 500
+height = 500
 offset = 100
 
 data PongGame = Game 
