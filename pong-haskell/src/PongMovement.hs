@@ -16,8 +16,16 @@ moveBall seconds game = game
 wallBounce :: PongGame -> PongGame
 wallBounce game = game {ballVel = (vx, vy') }
         where
-            radius = 10
 
             (vx, vy) = ballVel game
-            vy' | wallCollision (ballLoc game) radius = -vy
+            vy' | wallCollision (ballLoc game) ballRadius = -vy
                 | otherwise = vy 
+
+
+paddleBounce :: PongGame -> PongGame
+paddleBounce game = game { ballVel = (vx', vy)}
+        where
+            (vx, vy) = ballVel game
+
+            vx' | paddleCollision game = (-vx)
+                | otherwise = vx

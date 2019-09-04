@@ -8,8 +8,8 @@ render :: PongGame -> Picture
 render game = pictures
     [ball
     , walls
-    , mkPaddle rose 230 $ player1 game
-    , mkPaddle orange (-230) $ player2 game
+    , mkPaddle rose paddleDistance $ player1 game
+    , mkPaddle orange (-paddleDistance) $ player2 game
     ]
     where
         ball = uncurry translate (ballLoc game) $ color ballColor $ circleSolid 10
