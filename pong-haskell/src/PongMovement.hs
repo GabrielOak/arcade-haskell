@@ -13,6 +13,17 @@ moveBall seconds game = game
         x' = x + vx * seconds
         y' = y + vy * seconds
 
+movePaddles :: PongGame -> PongGame
+movePaddles game = game { player1 = movePaddle paddleStep (player1v game) (player1 game)
+                        , player2 = movePaddle paddleStep (player2v game) (player2 game)
+                        }
+
+movePaddle :: Float -> Float -> Float -> Float
+movePaddle step velocity player | velocity == 0 = player
+                                | player >= fromIntegral offset && velocity < 0 = player + (step * velocity)
+                                | player <= fromIntegral (-offset) && velocity > 0 = player + (step * velocity)
+                                | player > fromIntegral (-offset) && player < fromIntegral offset = player + (step * velocity)
+                                | otherwise = player
 wallBounce :: PongGame -> PongGame
 wallBounce game = game {ballVel = (vx, vy') }
         where

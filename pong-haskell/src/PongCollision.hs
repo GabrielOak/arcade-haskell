@@ -26,13 +26,13 @@ paddleCollision game =
         paddleYP2 = player2 game
 
         paddleCornerXP1 = paddleXP1 -paddleWidth / 2
-        paddleCornerYP1 = paddleYP1 -paddleWidth / 2
+        paddleCornerYP1 = paddleYP1 -paddleHeight / 2
 
         paddleCornerXP2 = paddleXP2 -paddleWidth / 2
-        paddleCornerYP2 = paddleYP2 -paddleWidth / 2
+        paddleCornerYP2 = paddleYP2 -paddleHeight / 2
 
         deltaXP1 = x - max paddleCornerXP1 (min x (paddleCornerXP1 + paddleWidth))
-        deltaYP1 = y - max paddleCornerYP1 (min y (paddleCornerYP1 + paddleWidth))
+        deltaYP1 = y - max paddleCornerYP1 (min y (paddleCornerYP1 + paddleHeight   ))
 
         deltaXP2 = x - max paddleCornerXP2 (min x (paddleCornerXP2 + paddleWidth))
-        deltaYP2 = y - max paddleCornerYP2 (min y (paddleCornerYP2 + paddleWidth))
+        deltaYP2 = y - max paddleCornerYP2 (min y (paddleCornerYP2 + paddleHeight))
