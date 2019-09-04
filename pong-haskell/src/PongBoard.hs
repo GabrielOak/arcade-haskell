@@ -22,7 +22,9 @@ data PongGame = Game
     { ballLoc :: (Float, Float)
     , ballVel :: (Float, Float)
     , player1 :: Float
+    , player1v :: Float
     , player2 :: Float
+    , player2v :: Float
     }  deriving Show
 
 initialState :: PongGame
@@ -30,5 +32,7 @@ initialState = Game
     { ballLoc = (-10, 30)
     , ballVel = (40, -100)
     , player1 = 40
+    , player1v = 0
     , player2 = -80
+    , player2v = 0
     }
