@@ -10,6 +10,14 @@ width = 500
 height = 500
 offset = 100
 
+paddleWidth, paddleHeight, paddleBorder, paddleDistance, paddleStep, ballRadius :: Float
+paddleWidth = 26
+paddleHeight = 86
+paddleBorder = 11
+paddleDistance = 230
+paddleStep = 5
+ballRadius = 10
+
 data PongGame = Game 
     { ballLoc :: (Float, Float)
     , ballVel :: (Float, Float)

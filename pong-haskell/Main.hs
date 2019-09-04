@@ -19,7 +19,7 @@ updateIO :: Float -> PongGame -> IO PongGame
 updateIO seconds game = return $ update seconds game
 
 update :: Float -> PongGame -> PongGame
-update seconds = wallBounce . moveBall seconds
+update seconds = wallBounce . paddleBounce . moveBall seconds
 
 main :: IO ()
 main = play window background fps initialState render handleKeys update
