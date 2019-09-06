@@ -32,7 +32,7 @@ data PongGame = Game
 initialState :: PongGame
 initialState = Game 
     { ballLoc = (-10, 30)
-    , ballVel = (40, -100)
+    , ballVel = (150, -100)
     , player1 = 40
     , player1v = 0
     , player2 = -80
