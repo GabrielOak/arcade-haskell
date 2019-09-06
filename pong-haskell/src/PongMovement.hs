@@ -24,6 +24,7 @@ movePaddle step velocity player | velocity == 0 = player
                                 | player <= fromIntegral (-offset) && velocity > 0 = player + (step * velocity)
                                 | player > fromIntegral (-offset) && player < fromIntegral offset = player + (step * velocity)
                                 | otherwise = player
+                                
 wallBounce :: PongGame -> PongGame
 wallBounce game = game {ballVel = (vx, vy') }
         where

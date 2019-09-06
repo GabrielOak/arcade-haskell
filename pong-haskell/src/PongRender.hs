@@ -19,10 +19,10 @@ wall :: Float -> Picture
 wall offset = 
     translate 0 offset $
         color wallColor $
-            rectangleSolid 480 20
+            rectangleSolid  (realToFrac width - 10) 20
 
-wallColor = greyN 0.5
-walls = pictures [wall 250, wall (-250)]
+wallColor = greyN 0.5 
+walls = pictures [wall (realToFrac heigth/2 + 2), wall (-(realToFrac heigth/2 + 2))]
 
 mkPaddle :: Color -> Float -> Float -> Picture
 mkPaddle col x y = pictures

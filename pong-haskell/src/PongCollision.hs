@@ -8,8 +8,8 @@ type Position = (Float, Float)
 wallCollision :: Position -> Radius -> Bool
 wallCollision (_,y) radius = topCollision || bottomCollision
         where
-            topCollision = y - radius <= -fromIntegral width / 2
-            bottomCollision = y + radius >= fromIntegral width / 2 
+            topCollision = y - radius <= -fromIntegral heigth / 2
+            bottomCollision = y + radius >= fromIntegral heigth / 2 
 
 paddleCollision :: PongGame -> Bool
 paddleCollision game = 
@@ -26,13 +26,13 @@ paddleCollision game =
         paddleYP2 = player2 game
 
         paddleCornerXP1 = paddleXP1 -paddleWidth / 2
-        paddleCornerYP1 = paddleYP1 -paddleHeight / 2
+        paddleCornerYP1 = paddleYP1 -paddleHeigth / 2
 
         paddleCornerXP2 = paddleXP2 -paddleWidth / 2
-        paddleCornerYP2 = paddleYP2 -paddleHeight / 2
+        paddleCornerYP2 = paddleYP2 -paddleHeigth / 2
 
         deltaXP1 = x - max paddleCornerXP1 (min x (paddleCornerXP1 + paddleWidth))
-        deltaYP1 = y - max paddleCornerYP1 (min y (paddleCornerYP1 + paddleHeight   ))
+        deltaYP1 = y - max paddleCornerYP1 (min y (paddleCornerYP1 + paddleHeigth))
 
         deltaXP2 = x - max paddleCornerXP2 (min x (paddleCornerXP2 + paddleWidth))
-        deltaYP2 = y - max paddleCornerYP2 (min y (paddleCornerYP2 + paddleHeight))
+        deltaYP2 = y - max paddleCornerYP2 (min y (paddleCornerYP2 + paddleHeigth))
