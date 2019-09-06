@@ -32,9 +32,10 @@ walls = pictures [wall (realToFrac heigth/2 + 2), wall (-(realToFrac heigth/2 + 
 
 mkPaddle :: Color -> Float -> Float -> Picture
 mkPaddle col x y = pictures
-    [ translate x y $ color col $ rectangleSolid 26 86
-    , translate x y $ color paddleColor $ rectangleSolid 20 80
-    ]
+  [ translate x y $ color col $ rectangleSolid paddleWidth paddleHeigth
+  , translate x y $ color paddleColor $ rectangleSolid
+        (paddleWidth - paddleBorder) (paddleHeigth - paddleBorder)
+  ]
 
 paddleColor = light (light blue)
 

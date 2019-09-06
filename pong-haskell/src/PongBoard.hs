@@ -44,5 +44,5 @@ initialState = Game
     , player2 = -80
     , player2v = 0
     , paused = False
-    , gameState = Paused
+    , gameState = Playing
     }

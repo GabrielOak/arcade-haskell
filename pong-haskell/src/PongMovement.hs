@@ -4,14 +4,16 @@ import PongBoard
 import PongCollision
 
 moveBall :: Float -> PongGame -> PongGame
-moveBall seconds game = game 
-    { ballLoc = (x', y')}
-    where
-        (x, y) = ballLoc game
-        (vx, vy) = ballVel game
 
-        x' = x + vx * seconds
-        y' = y + vy * seconds
+moveBall _ game @ Game { gameState = Paused} = game
+
+moveBall seconds game = game { ballLoc = (x', y')}
+                    where
+                        (x, y) = ballLoc game
+                        (vx, vy) = ballVel game
+                    
+                        x' = x + vx * seconds
+                        y' = y + vy * seconds
 
 movePaddles :: PongGame -> PongGame
 movePaddles game = game { player1 = movePaddle paddleStep (player1v game) (player1 game)
