@@ -20,6 +20,10 @@ paddleDistance = 330
 paddleStep = 5
 ballRadius = 10
 
+data GameState =
+    Playing | Paused
+    deriving Show
+
 data PongGame = Game 
     { ballLoc :: (Float, Float)
     , ballVel :: (Float, Float)
@@ -27,14 +31,18 @@ data PongGame = Game
     , player1v :: Float
     , player2 :: Float
     , player2v :: Float
+    , paused :: Bool
+    , gameState :: GameState
     }  deriving Show
 
 initialState :: PongGame
 initialState = Game 
     { ballLoc = (-10, 30)
-    , ballVel = (150, -100)
+    , ballVel = (200, -200)
     , player1 = 40
     , player1v = 0
     , player2 = -80
     , player2v = 0
+    , paused = False
+    , gameState = Paused
     }

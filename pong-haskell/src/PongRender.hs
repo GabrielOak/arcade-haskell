@@ -5,15 +5,21 @@ import Graphics.Gloss
 import PongBoard
 
 render :: PongGame -> Picture
-render game = pictures
-    [ball
-    , walls
-    , mkPaddle rose paddleDistance $ player1 game
-    , mkPaddle orange (-paddleDistance) $ player2 game
-    ]
-    where
-        ball = uncurry translate (ballLoc game) $ color ballColor $ circleSolid 10
-        ballColor = dark red   
+render game @ Game { gameState = Paused } =
+    mkStateText orange "PAUSED" 0.5 0.5
+
+render game @ Game { gameState = Playing } = pictures
+            [ball
+            , walls
+            , mkPaddle rose paddleDistance $ player1 game
+            , mkPaddle orange (-paddleDistance) $ player2 game
+            ]
+            where
+                ball = uncurry translate (ballLoc game) $ color ballColor $ circleSolid 10
+                ballColor = dark red 
+                
+mkStateText :: Color -> String -> Float -> Float -> Picture
+mkStateText col text x y = translate (-120) 0 $ scale x y $ color col $ Text text 
 
 wall :: Float -> Picture
 wall offset = 
@@ -31,3 +37,4 @@ mkPaddle col x y = pictures
     ]
 
 paddleColor = light (light blue)
+

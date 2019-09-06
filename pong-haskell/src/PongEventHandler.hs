@@ -8,6 +8,10 @@ handleKeys :: Event -> PongGame -> PongGame
 handleKeys (EventKey (Char 'r') _ _ _) game = 
     game {ballLoc = (0, 0)}
 
+handleKeys (EventKey (Char 'p') Up _ _) game@ Game { gameState = Playing } =
+    game { gameState = Paused }
+handleKeys (EventKey (Char 'p') Up _ _) game@ Game { gameState = Paused } =
+    game { gameState = Playing }
 
 handleKeys (EventKey (SpecialKey KeyUp) Down _ _  ) game = 
     game { player1v = 1 }
