@@ -1,20 +1,22 @@
 module PongBoard where
 
 import Graphics.Gloss
+import Graphics.Gloss.Interface.Environment
 
 background :: Color
 background = black
 
-width, height, offset :: Int
-width = 500
-height = 500
-offset = 100
+width, heigth, offset, screenOffset :: Int
+width = 700
+heigth = 600
+offset = 240
+screenOffset = 100
 
-paddleWidth, paddleHeight, paddleBorder, paddleDistance, paddleStep, ballRadius :: Float
+paddleWidth, paddleHeigth, paddleBorder, paddleDistance, paddleStep, ballRadius :: Float
 paddleWidth = 26
-paddleHeight = 86
+paddleHeigth = 86
 paddleBorder = 11
-paddleDistance = 230
+paddleDistance = 330
 paddleStep = 5
 ballRadius = 10
 

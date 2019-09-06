@@ -10,7 +10,7 @@ import PongMovement
 import PongEventHandler
 
 window :: Display
-window = InWindow "Pong" (width, height) (offset, offset)
+window = InWindow "Pong" (width, heigth) (screenOffset, screenOffset)
 
 fps :: Int
 fps = 60
@@ -19,7 +19,7 @@ updateIO :: Float -> PongGame -> IO PongGame
 updateIO seconds game = return $ update seconds game
 
 update :: Float -> PongGame -> PongGame
-update seconds = wallBounce . paddleBounce . moveBall seconds
+update seconds =  movePaddles . wallBounce . paddleBounce . moveBall seconds
 
 main :: IO ()
 main = play window background fps initialState render handleKeys update
