@@ -12,16 +12,15 @@ heigth = 600
 offset = 240
 screenOffset = 100
 
-paddleWidth, paddleHeigth, paddleBorder, paddleDistance, paddleStep, ballRadius :: Float
+paddleWidth, paddleHeigth, paddleBorder, paddleDistance, ballRadius :: Float
 paddleWidth = 26
 paddleHeigth = 86
 paddleBorder = 11
 paddleDistance = 330
-paddleStep = 5
 ballRadius = 10
 
 data GameState =
-    Playing | Paused
+    Playing | Paused | Menu
     deriving Show
 
 data PongGame = Game 
@@ -29,20 +28,26 @@ data PongGame = Game
     , ballVel :: (Float, Float)
     , player1 :: Float
     , player1v :: Float
+    , player1s :: Float
     , player2 :: Float
     , player2v :: Float
+    , player2s :: Float
     , paused :: Bool
     , gameState :: GameState
+    , paddleStep :: Float
     }  deriving Show
 
 initialState :: PongGame
 initialState = Game 
     { ballLoc = (-10, 30)
-    , ballVel = (200, -200)
-    , player1 = 40
+    , ballVel = (150, -150)
+    , player1 = 0
     , player1v = 0
+    , player1s = 0
     , player2 = -80
     , player2v = 0
+    , player2s = 0
     , paused = False
-    , gameState = Playing
+    , gameState = Menu
+    , paddleStep = 4
     }
