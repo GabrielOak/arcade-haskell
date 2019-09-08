@@ -24,7 +24,7 @@ module Main(main) where
   window = FullScreen
   
   background :: Color
-  background = black
+  background = dark black
   
   type Position = (Float, Float)
   data PlayerMovement = PlayerUp | 
@@ -71,10 +71,10 @@ module Main(main) where
   drawing game = pictures [runnerBall, taggerBall, scoreText, pause, walls]
     where
   
-      runnerBall = uncurry translate (runner game) $ color runnerColor $ (Circle runnerRadius)
-      runnerColor = blue
+      runnerBall = uncurry translate (runner game) $ color runnerColor $ (circleSolid runnerRadius)
+      runnerColor = green
   
-      taggerBall =  uncurry translate (tagger game) $ color taggerColor $ (Circle taggerRadius)
+      taggerBall =  uncurry translate (tagger game) $ color taggerColor $ (circleSolid taggerRadius)
       taggerColor = red
   
       scoreText = translate (-15) (300) $
@@ -94,7 +94,7 @@ module Main(main) where
           color wallColor $
             rectangleSolid wallWidth 720 
   
-      wallColor = greyN 0.5
+      wallColor = dark white
       walls = pictures [wallHorizontal 370, wallHorizontal (-370), wallVertical (650), wallVertical (-650)]
   
       pause = if (paused game)
@@ -111,12 +111,7 @@ module Main(main) where
         scale 0.25 0.25 $
         color white $ 
         Text ""
-  
-  distanceWallHorizontal (x, y) z = y - z 
-  
-  getX (x, y) = x
-  getY (x, y) = y
-  
+    
   moveRunner :: Position -> PlayerMovement -> Position
   moveRunner (px, py) PlayerUp = if abs (py - 365) <= runnerRadius 
     then (px, py) 
