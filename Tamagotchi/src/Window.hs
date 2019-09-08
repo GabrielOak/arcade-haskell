@@ -16,7 +16,7 @@ offset = 100
 
 -- Cor de fundo
 background :: Color
-background = white
+background = black
 
 -- Janela do jogo
 window :: Display
