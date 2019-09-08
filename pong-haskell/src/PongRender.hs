@@ -13,13 +13,14 @@ render game @ Game { gameState = Menu } =
     pictures [ mKmenu orange "PONG" 0.5 0.5 (-100) 200
              , mKmenu orange "Keys :" 0.3 0.3 (-paddleDistance) 160
              , mKmenu orange "Press ''P'' to Play/Pause" 0.3 0.3 (-paddleDistance) 100
-             , mKmenu orange "Press ''R'' to Recenter Ball" 0.3 0.3 (-paddleDistance) 60
-             , mKmenu orange "Player 1 :" 0.3 0.3 (-paddleDistance) 0
-             , mKmenu orange "Key Up" 0.3 0.3 (-paddleDistance) (-40)
-             , mKmenu orange "Key Down" 0.3 0.3 (-paddleDistance) (-80)
-             , mKmenu orange "Player 2 :" 0.3 0.3 (-paddleDistance) (-140)
-             , mKmenu orange "''W'' to Up " 0.3 0.3 (-paddleDistance) (-180)
-             , mKmenu orange "''S'' to Down" 0.3 0.3 (-paddleDistance) (-220)
+             , mKmenu orange "Press ''R'' to Reset Game" 0.3 0.3 (-paddleDistance) 60
+             , mKmenu orange "Press ''C'' to Recenter Ball" 0.3 0.3 (-paddleDistance) 20
+             , mKmenu orange "Player 1 :" 0.3 0.3 (-paddleDistance) (-40)
+             , mKmenu orange "Key Up" 0.3 0.3 (-paddleDistance) (-80)
+             , mKmenu orange "Key Down" 0.3 0.3 (-paddleDistance) (-120)
+             , mKmenu orange "Player 2 :" 0.3 0.3 (-paddleDistance) (-180)
+             , mKmenu orange "''W'' to Up " 0.3 0.3 (-paddleDistance) (-220)
+             , mKmenu orange "''S'' to Down" 0.3 0.3 (-paddleDistance) (-260)
              ]
 
 render game @ Game { gameState = Paused } =
