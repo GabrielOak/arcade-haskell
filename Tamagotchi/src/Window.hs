@@ -22,6 +22,6 @@ background = black
 window :: Display
 window = InWindow "Tamagotchi" (width,height) (offset, offset)
 
-renderText :: Float -> Float -> Color -> String -> Picture
-renderText x y cor umaString = translate (x) (y) $ scale 0.2 0.3 $ color cor $ text umaString 
+renderText :: Float -> Float -> Float -> Float-> Color -> String -> Picture
+renderText x y h w cor umaString = translate (x) (y) $ scale h w $ color cor $ text umaString 
 

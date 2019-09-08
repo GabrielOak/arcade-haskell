@@ -111,21 +111,21 @@ mostrarStatusUnico char (EstadoNormal
 mostrarStatusTodos :: Estados -> [Picture]
 mostrarStatusTodos estado = [fm,fc,e,s,p,b]
     where
-        fm = renderText (-600) (350) white $ mostrarStatusUnico 'f' estado
-        fc = renderText (-600) (300) white $ mostrarStatusUnico 'a' estado
-        e = renderText (-600) (250) white $ mostrarStatusUnico 'e' estado
-        s = renderText (-600) (200) white $ mostrarStatusUnico 's' estado
-        p = renderText (-600) (150) white $ mostrarStatusUnico 'p' estado
-        b = renderText (-600) (100) white $ mostrarStatusUnico 'b' estado
+        fm = renderText (-600) (350) 1 1 white $ mostrarStatusUnico 'f' estado
+        fc = renderText (-600) (300) 1 1 white $ mostrarStatusUnico 'a' estado
+        e = renderText (-600) (250) 1 1 white $ mostrarStatusUnico 'e' estado
+        s = renderText (-600) (200) 1 1 white $ mostrarStatusUnico 's' estado
+        p = renderText (-600) (150) 1 1 white $ mostrarStatusUnico 'p' estado
+        b = renderText (-600) (100) 1 1 white $ mostrarStatusUnico 'b' estado
         
 drawEyes :: Float -> Float -> Float -> Float -> Picture
 drawEyes x y t r = translate x y 
               $ color red
               $ thickCircle t r
 
-desenhaBoca :: Float -> Float -> Float -> Picture
-desenhaBoca fs sn rd = translate 0 (50) 
-                       $ color red
+desenhaBoca :: Float -> Float -> Float -> Float -> Float -> Color -> Picture
+desenhaBoca x y fs sn rd c = translate x y
+                       $ color c
                        $ arc fs sn rd
         
 desenhaBarra :: Float -> Float -> Float -> Float -> Color -> Picture
@@ -137,5 +137,10 @@ desenhaBarraContorno :: Float -> Float -> Float -> Float -> Color -> Picture
 desenhaBarraContorno x y w h c = translate x y
                        $ color c
                        $ rectangleWire w h
+
+desenhaCirculo :: Float -> Float -> Float -> Color -> Picture
+desenhaCirculo x y r c = translate x y
+                        $ color c
+                        $ circleSolid r
 
 
