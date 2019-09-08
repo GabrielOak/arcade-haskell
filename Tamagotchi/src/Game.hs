@@ -9,11 +9,10 @@ import Window
 estadoInicial :: Estados
 estadoInicial = EstadoNormal
     {
-        satisfação = 0,
-        confiança = 0,
-        força = 60,
-        influência = 60,
-        raiva = 20,
+        fome = 40,
+        forca = 60,
+        energia = 50,
+        satisfacao = 50,
         pupila = 20,
         boca  = 75
     }
@@ -30,21 +29,19 @@ desenhaNaTela game = pictures [leftEye,
                                barraSatisfacao,
                                barraSatisfacaoContorno,
 
-                               statusConfianca,
-                               barraConfianca,
-                               barraConfiancaContorno,
-
                                statusForca,
                                barraForca,
                                barraForcaContorno,
 
-                               statusInfluencia,
-                               barraInfluencia,
-                               barraInfluenciaContorno,
+                               statusFome,
+                               barraFome,
+                               barraFomeContorno,
 
-                               statusRaiva,
-                               barraRaiva,
-                               barraRaivaContorno]
+                               statusEnergia,
+                               barraEnergia,
+                               barraEnergiaContorno,
+                               
+                               fomi]
     where 
         leftEye = drawEyes (-85) 150 30 (pupila game)
         rightEye = drawEyes 85 150 30 (pupila game)
@@ -52,33 +49,30 @@ desenhaNaTela game = pictures [leftEye,
 
         -- Barra de satisfação
         statusSatisfacao = renderText (-555) (330) white $ "Satisfacao"
-        barraSatisfacao = desenhaBarra  (-500) 300 (satisfação game) 30 red
+        barraSatisfacao = desenhaBarra  (-500) 300 (satisfacao game) 30 red
         barraSatisfacaoContorno = desenhaBarraContorno (-500) 300 110 40 white
 
-        -- Barra de confiança
-        statusConfianca = renderText (-555) (230) white $ "Confianca"
-        barraConfianca = desenhaBarra  (-500) 200 (confiança game) 30 red
-        barraConfiancaContorno = desenhaBarraContorno (-500) 200 110 40 white
+        fomi = renderText 0 (-100) white $ mostrarStatusUnico 'f' game
 
-        -- Barra de confiança
-        statusForca = renderText (-555) (130) white $ "Forca"
-        barraForca = desenhaBarra  (-500) 100 (força game) 30 red
+        -- Barra de fome
+        statusFome = renderText (-555) (230) white $ "Fome"
+        barraFome = desenhaBarra  (-500) 200 (fome game) 30 red
+        barraFomeContorno = desenhaBarraContorno (-500) 200 110 40 white
+
+        -- Barra de força
+        statusForca = renderText (-555) (130) white $ "Vitalidade"
+        barraForca = desenhaBarra  (-500) 100 (forca game) 30 red
         barraForcaContorno = desenhaBarraContorno (-500) 100 110 40 white
 
-        -- Barra de confiança
-        statusInfluencia = renderText (-555) (30) white $ "Influencia"
-        barraInfluencia = desenhaBarra  (-500) 0 (influência game) 30 red
-        barraInfluenciaContorno = desenhaBarraContorno (-500) 0 110 40 white
-
-        -- Barra de confiança
-        statusRaiva = renderText (-555) (-70) white $ "Raiva"
-        barraRaiva = desenhaBarra  (-500) (-100) (raiva game) 30 red
-        barraRaivaContorno = desenhaBarraContorno (-500) (-100) 110 40 white
+        -- Barra de energia
+        statusEnergia = renderText (-555) (30) white $ "Energia"
+        barraEnergia = desenhaBarra  (-500) 0 (energia game) 30 red
+        barraEnergiaContorno = desenhaBarraContorno (-500) 0 110 40 white
     
 input :: Event -> Estados -> Estados
 input (EventKey (Char 's') Down _ _) game = sacrificio game
-input (EventKey (Char 'c') Down _ _) game = conhecer game
-input (EventKey (Char 'e') Down _ _) game = exorcizar game
+input (EventKey (Char 'b') Down _ _) game = brincar game
+input (EventKey (Char 'c') Down _ _) game = cura game
 input _ game = game
 
 atualizaJogo :: Float -> Estados -> Estados

@@ -5,11 +5,10 @@ import Graphics.Gloss
 
 data Estados = EstadoNormal 
     {
-        satisfação :: Float,
-        confiança :: Float,
-        força :: Float,
-        influência :: Float,
-        raiva :: Float,
+        fome :: Float,
+        forca :: Float,
+        energia :: Float,
+        satisfacao :: Float,
         pupila :: Float,
         boca :: Float
     } deriving (Show)
@@ -24,99 +23,100 @@ decrementaStatus status i = if status > 0 then (status-i) else 0
 sacrificio :: Estados -> Estados
 sacrificio EstadoNormal 
     { 
-        satisfação = s,
-        confiança = c,
-        força = f,
-        influência = i,
-        raiva = r,
+        fome = fm,
+        forca = fc,
+        energia = e,
+        satisfacao = s,
         pupila = p,
         boca  = b
     } 
     =
     EstadoNormal
     {
-        satisfação = incrementaStatus s 5,
-        confiança = incrementaStatus c 5,
-        força = incrementaStatus f 5,
-        influência = i,
-        raiva = r,
-        pupila = p-1,
-        boca  = b-1
+        fome = incrementaStatus fm 5,
+        forca = if fm < 100 then (fc+1)
+                else 
+                    if fm >= 100 && fc /= 0 then (fc-2)
+                    else s,
+        energia = decrementaStatus e 5,
+        satisfacao = s,
+        pupila = if fm == 100 || e == 0 then (p+2) else (p-1),
+        boca  = if fm == 100 then (b+4) else (b-1)
     }
 
-conhecer :: Estados -> Estados
-conhecer EstadoNormal 
+brincar :: Estados -> Estados
+brincar EstadoNormal 
     { 
-        satisfação = s,
-        confiança = c,
-        força = f,
-        influência = i,
-        raiva = r,
+        fome = fm,
+        forca = fc,
+        energia = e,
+        satisfacao = s,
         pupila = p,
         boca  = b
     } 
     =
     EstadoNormal
     {
-        satisfação = s,
-        confiança = decrementaStatus c 5,
-        força = f,
-        influência = decrementaStatus i 5,
-        raiva = incrementaStatus r 2,
-        pupila = p+1,
-        boca  = b+1
-    }
+        fome = decrementaStatus fm 5,
+        forca = if e == 0 && fc /= 0 then fc-5 else fc,
+        energia = decrementaStatus e 5,
+        satisfacao = if e > 0 then (s+5)
+                        else 
+                        if e == 0 && s /= 0 then (s-5)
+                        else s,
+        pupila = if e == 0 then (p+2) else (p-1),
+        boca  = if e == 0 then (b+4) else (b-1)
+    }    
 
-exorcizar :: Estados -> Estados
-exorcizar EstadoNormal 
+cura :: Estados -> Estados 
+cura EstadoNormal  
     { 
-        satisfação = s,
-        confiança = c,
-        força = f,
-        influência = i,
-        raiva = r,
+        fome = fm,
+        forca = fc,
+        energia = e,
+        satisfacao = s,
         pupila = p,
         boca  = b
     } 
     =
     EstadoNormal
     {
-        satisfação = decrementaStatus s 5,
-        confiança = decrementaStatus c 5,
-        força = decrementaStatus f 5,
-        influência = decrementaStatus i 5,
-        raiva = incrementaStatus r 5,
-        pupila = p+1,
-        boca  = b+1
-    }
-    
+        fome = fm,
+        forca = incrementaStatus fc 10,
+        energia = e,
+        satisfacao = if e > 0 then (s+1)
+                        else 
+                        if e == 0 && s /= 0 then (s-1)
+                        else s,
+        pupila = decrementaStatus p 1,
+        boca  = decrementaStatus b 1
+    }    
 mostrarStatusUnico :: Char -> Estados -> String
 mostrarStatusUnico char (EstadoNormal 
     { 
-        satisfação = s,
-        confiança = c,
-        força = f,
-        influência = i,
-        raiva = r,
+        fome = fm,
+        forca = fc,
+        energia = e,
+        satisfacao = s,
         pupila = p,
         boca  = b
     })  
-        | (char == 'i') = "\nIdade: " ++ show s
-        | (char == 's') = "\nSaude: " ++ show c
-        | (char == 'e') = "\nEnergia: " ++ show f
-        | (char == 'l') = "\nLimpeza: " ++ show i
-        | (char == 'p') = "\nPeso: " ++ show r
-        | (char == 'f') = "\nFelicidade: " ++ show p
+        | (char == 'f') = "fome: " ++ show fm
+        | (char == 'a') = "forca: " ++ show fc
+        | (char == 'e') = "energia: " ++ show e
+        | (char == 'l') = "satisfacao: " ++ show s
+        | (char == 'p') = "pupila: " ++ show p
+        | (char == 'b') = "boca: " ++ show b
 
 mostrarStatusTodos :: Estados -> [Picture]
-mostrarStatusTodos estado = [i,s,e,l,p,f]
+mostrarStatusTodos estado = [fm,fc,e,s,p,b]
     where
-        i = renderText (-600) (350) white $ mostrarStatusUnico 'i' estado
-        s = renderText (-600) (300) white $ mostrarStatusUnico 's' estado
+        fm = renderText (-600) (350) white $ mostrarStatusUnico 'f' estado
+        fc = renderText (-600) (300) white $ mostrarStatusUnico 'a' estado
         e = renderText (-600) (250) white $ mostrarStatusUnico 'e' estado
-        l = renderText (-600) (200) white $ mostrarStatusUnico 'l' estado
+        s = renderText (-600) (200) white $ mostrarStatusUnico 's' estado
         p = renderText (-600) (150) white $ mostrarStatusUnico 'p' estado
-        f = renderText (-600) (100) white $ mostrarStatusUnico 'f' estado
+        b = renderText (-600) (100) white $ mostrarStatusUnico 'b' estado
         
 drawEyes :: Float -> Float -> Float -> Float -> Picture
 drawEyes x y t r = translate x y 
