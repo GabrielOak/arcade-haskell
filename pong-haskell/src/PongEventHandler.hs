@@ -12,7 +12,18 @@ handleKeys (EventKey (Char 'c') _ _ _) game =
     game {ballLoc = (0, 0)}
 
 handleKeys (EventKey (Char 'r') _ _ _) game = 
-    game {ballLoc = (0, 0), player1s = 0, player2s = 0}
+    game { ballLoc = (-10, 30)
+         , ballVel = (180, -180)
+         , player1 = 0
+         , player1v = 0
+         , player1s = 0
+         , player2 = -80
+         , player2v = 0
+         , player2s = 0
+         , paused = False
+         , gameState = Menu
+         , paddleStep = 4
+         }
 
 handleKeys (EventKey (Char 'p') Up _ _) game@ Game { gameState = Playing } =
     game { gameState = Paused }
