@@ -10,7 +10,10 @@ data Estados = EstadoNormal
         energia :: Float,
         satisfacao :: Float,
         pupila :: Float,
-        boca :: Float
+        boca :: Float,
+        contador :: Float,
+        nComida :: Int,
+        nRemedio :: Int
     } deriving (Show)
 
 
@@ -28,7 +31,10 @@ sacrificio EstadoNormal
         energia = e,
         satisfacao = s,
         pupila = p,
-        boca  = b
+        boca  = b,
+        contador = c,
+        nComida = nc,
+        nRemedio = nr
     } 
     =
     EstadoNormal
@@ -40,8 +46,11 @@ sacrificio EstadoNormal
                     else s,
         energia = decrementaStatus e 5,
         satisfacao = s,
-        pupila = if fm == 100 || e == 0 then (p+2) else (p-1),
-        boca  = if fm == 100 then (b+4) else (b-1)
+        pupila = if fm == 100 || e == 0 then (p+2) else (p),
+        boca  = if fm == 100 then (b+4) else (b),
+        contador = c,
+        nComida = nc - 1,
+        nRemedio = nr
     }
 
 brincar :: Estados -> Estados
@@ -52,7 +61,10 @@ brincar EstadoNormal
         energia = e,
         satisfacao = s,
         pupila = p,
-        boca  = b
+        boca  = b,
+        contador = c,
+        nComida = nc,
+        nRemedio = nr
     } 
     =
     EstadoNormal
@@ -64,8 +76,11 @@ brincar EstadoNormal
                         else 
                         if e == 0 && s /= 0 then (s-5)
                         else s,
-        pupila = if e == 0 then (p+2) else (p-1),
-        boca  = if e == 0 then (b+4) else (b-1)
+        pupila = if e == 0 then (p+2) else (p),
+        boca  = if e == 0 then (b+4) else (b),
+        contador = c,
+        nComida = nc,
+        nRemedio = nr
     }    
 
 cura :: Estados -> Estados 
@@ -76,7 +91,10 @@ cura EstadoNormal
         energia = e,
         satisfacao = s,
         pupila = p,
-        boca  = b
+        boca  = b,
+        contador = c,
+        nComida = nc,
+        nRemedio = nr
     } 
     =
     EstadoNormal
@@ -88,9 +106,13 @@ cura EstadoNormal
                         else 
                         if e == 0 && s /= 0 then (s-1)
                         else s,
-        pupila = decrementaStatus p 1,
-        boca  = decrementaStatus b 1
+        pupila = p,
+        boca  = b,
+        contador = c,
+        nComida = nc,
+        nRemedio = nr -1
     }    
+
 mostrarStatusUnico :: Char -> Estados -> String
 mostrarStatusUnico char (EstadoNormal 
     { 
@@ -99,7 +121,10 @@ mostrarStatusUnico char (EstadoNormal
         energia = e,
         satisfacao = s,
         pupila = p,
-        boca  = b
+        boca  = b,
+        contador = c,
+        nComida = nc,
+        nRemedio = nr
     })  
         | (char == 'f') = "fome: " ++ show fm
         | (char == 'a') = "forca: " ++ show fc

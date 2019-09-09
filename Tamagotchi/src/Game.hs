@@ -14,11 +14,14 @@ estadoInicial = EstadoNormal
         energia = 50,
         satisfacao = 50,
         pupila = 20,
-        boca  = 75
+        boca  = 75,
+        contador = 0,
+        nComida = 3,
+        nRemedio = 2
     }
 
 fps :: Int
-fps = 60
+fps = 10
 
 desenhaNaTela :: Estados -> Picture
 desenhaNaTela game = pictures [leftEye,
@@ -57,7 +60,14 @@ desenhaNaTela game = pictures [leftEye,
                                quadradoCurar,
                                wCruz,
                                hCruz,
-                               letraC
+                               letraC,
+
+                               comidaCounter,
+                               cx,
+                               remedioCounter,
+                               rx, cont
+
+                              
                                ]
     where 
         leftEye = drawEyes (-85) 150 30 (pupila game)
@@ -104,12 +114,43 @@ desenhaNaTela game = pictures [leftEye,
         wCruz = desenhaBarra 100 (-250) 30 7 white
         hCruz = desenhaBarra (100) (-250) 7 30 white
         letraC = renderText (93) (-300) 0.2 0.2 white "C"
+
+        comidaCounter = renderText (-100) (-220) 0.2 0.2 white $ show (nComida game)
+        remedioCounter = renderText (100) (-220) 0.2 0.2 white $ show (nRemedio game)
+        cx = renderText (-115) (-220) 0.2 0.2 white $ "x"
+        rx = renderText (85) (-220) 0.2 0.2 white $ "x"
+
+        cont = renderText (0) (0) 0.2 0.2  white $ show $ contador game 
     
 input :: Event -> Estados -> Estados
-input (EventKey (Char 's') Down _ _) game = sacrificio game
-input (EventKey (Char 'b') Down _ _) game = brincar game
-input (EventKey (Char 'c') Down _ _) game = cura game
+input (EventKey (Char 's') Down _ _) game = if (nComida game) > 0 then sacrificio game else game
+input (EventKey (Char 'b') Down _ _) game = if (energia game) > 0 then  brincar game else game
+input (EventKey (Char 'c') Down _ _) game = if (nRemedio game) > 0 then cura game else game
 input _ game = game
 
 atualizaJogo :: Float -> Estados -> Estados
-atualizaJogo segundos game = game 
+atualizaJogo segundos game = atualizaCont segundos game
+
+atualizaCont :: Float -> Estados -> Estados 
+atualizaCont  segundos  game = game {contador = x, fome = fm, satisfacao = s, energia = e, pupila = p, boca = b, nComida = nc, nRemedio = nr}
+        where
+            fm | ((contador game) >= 20 && (contador game) <= 20.1) || ((contador game) >= 40  && (contador game) <= 40.1) = (fome game) - 20
+               | (fome game ) <= 0                                                   = 0
+               | otherwise                                                           = (fome game)
+            x | (contador game) >= 41                                                = 0
+              | otherwise                                                            = (contador game) + segundos
+            s | (contador game) >= 20  && (contador game) <= 20.1 &&(fome game) <= 0 = (satisfacao game) - 12
+              | otherwise                                                            = (satisfacao game)
+            e | (contador game) >= 20  && (contador game) <= 20.1 && (fome game) > 0 = (energia game) + 10
+              | (energia game) >= 100                                                = 100
+              | otherwise                                                            = (energia game)
+            p | (contador game) >= 20  && (contador game) <= 20.1 &&(fome game) <= 0 = (pupila game) + 3
+              | otherwise                                                            = (pupila game)
+            b | (contador game) >= 20  && (contador game) <= 20.1 &&(fome game) <= 0 = (boca game) + 4
+              | otherwise                                                            = (boca game)
+            nc | (contador game) >= 30  && (contador game) <= 30.1                   = (nComida game) + 1
+               | otherwise                                                            = (nComida game)
+            nr | (contador game) >= 40  && (contador game) <= 40.1                   = (nRemedio game) + 1
+               | otherwise                                                            = (nRemedio game)     
+            
+         
