@@ -2,19 +2,20 @@ import Graphics.Gloss.Interface.Pure.Game
 import System.Random
 
 window :: World -> Display
-window world = InWindow "Snake" (resolution world) (200, 200)
+-- window world = InWindow "Snake" (resolution world) (200, 200)
+window world = FullScreen
 
 backgroundColor ::Color
 backgroundColor = black
 
 fps :: Int
-fps = 5
+fps = 10
 
 initialWorld :: Int -> World
 initialWorld seed = moveFood NewWorld
-    { resolution = (512, 512)
+    { resolution = (800, 600)
     , direction = SnakeUp
-    , dimencion = 13
+    , dimencion = 22
     , snake = [(0, 2), (0, 1), (0, 0)]
     , isOver = False
     , gen = mkStdGen seed
@@ -25,6 +26,7 @@ initialWorld seed = moveFood NewWorld
 drawWorld :: World -> Picture
 drawWorld world = pictures
     [ drawBounds world
+    , drawLines world
     , drawFood world
     , drawSnake world
     , drawPause world
@@ -58,11 +60,16 @@ handleStep _time world =
 
 drawBounds :: World -> Picture
 drawBounds world =
-    let x = size world
+    let x = size world 
     in  rectangleWire x x
 
 drawFood :: World -> Picture
 drawFood world = color red (drawBox (food world) world)
+
+drawLines :: World -> Picture
+drawLines world = 
+    let x = size world + 40
+    in color white (rectangleWire x x)
 
 drawSnake :: World -> Picture
 drawSnake world = case snake world of
