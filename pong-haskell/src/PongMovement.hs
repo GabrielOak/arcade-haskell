@@ -47,8 +47,8 @@ paddleBounce game = game { ballVel = (vx', vy)}
                 | otherwise = vx
 
 updateScore :: PongGame -> PongGame
-updateScore game | x > (paddleDistance + paddleWidth) = game {player1s = scorep1, ballLoc = (x',0), ballVel = (vx'* 1.2, vy* 1.2), paddleStep = pt}
-                 | x < (-(paddleDistance + paddleWidth)) = game {player2s = scorep2, ballLoc = (x'',0), ballVel = (vx'* 1.2, vy* 1.2), paddleStep = pt}
+updateScore game | x > (paddleDistance + paddleWidth) = game {player1s = scorep1, ballLoc = (x',0), ballVel = (vx'* 1.1, vy* 1.1), paddleStep = pt}
+                 | x < (-(paddleDistance + paddleWidth)) = game {player2s = scorep2, ballLoc = (x'',0), ballVel = (vx'* 1.1, vy* 1.1), paddleStep = pt}
                  | otherwise = game
             where 
                 (x, y) = ballLoc game
@@ -60,7 +60,7 @@ updateScore game | x > (paddleDistance + paddleWidth) = game {player1s = scorep1
 
                 vx' = vx * (-1) 
 
-                pt = (paddleStep game) + 1
+                pt = (paddleStep game) + 0.5
 
                 x' = paddleDistance - paddleWidth * 2
                 x'' = -paddleDistance + paddleWidth * 2
