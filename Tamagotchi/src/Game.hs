@@ -65,10 +65,7 @@ desenhaNaTela game = pictures [leftEye,
                                comidaCounter,
                                cx,
                                remedioCounter,
-                               rx, cont
-
-                              
-                               ]
+                               rx]
     where 
         leftEye = drawEyes (-85) 150 30 (pupila game)
         rightEye = drawEyes 85 150 30 (pupila game)

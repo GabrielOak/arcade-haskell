@@ -2,6 +2,7 @@ module Tamagotchi where
 
 import Window
 import Graphics.Gloss
+import System.IO
 
 data Estados = EstadoNormal 
     {
@@ -112,6 +113,24 @@ cura EstadoNormal
         nComida = nc,
         nRemedio = nr -1
     }    
+
+escreveArquivo :: Estados -> IO() 
+escreveArquivo EstadoNormal  
+    { 
+        fome = fm,
+        forca = fc,
+        energia = e,
+        satisfacao = s,
+        pupila = p,
+        boca  = b,
+        contador = c,
+        nComida = nc,
+        nRemedio = nr
+    } 
+    = do
+        conteudo <- readFile "teste.txt"
+        writeFile conteudo $ show fm
+
 
 mostrarStatusUnico :: Char -> Estados -> String
 mostrarStatusUnico char (EstadoNormal 
