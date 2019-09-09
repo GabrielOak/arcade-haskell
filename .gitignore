@@ -2,3 +2,4 @@ dist-newstyle
 stack.yaml.lock
 .stack-work
 cabal.project.local
+*dist*

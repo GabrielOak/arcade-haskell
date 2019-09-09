@@ -13,8 +13,8 @@ fps = 5
 initialWorld :: Int -> World
 initialWorld seed = moveFood NewWorld
     { resolution = (512, 512)
-    , direction = SnakeStoped
-    , dimencion = 11
+    , direction = SnakeUp
+    , dimencion = 13
     , snake = [(0, 2), (0, 1), (0, 0)]
     , isOver = False
     , gen = mkStdGen seed
@@ -56,21 +56,19 @@ handleStep _time world =
                 then world 
             else world { isOver = True }
 
---
-
 drawBounds :: World -> Picture
 drawBounds world =
     let x = size world
     in  rectangleWire x x
 
 drawFood :: World -> Picture
-drawFood world = color green (drawBox (food world) world)
+drawFood world = color red (drawBox (food world) world)
 
 drawSnake :: World -> Picture
 drawSnake world = case snake world of
     (p : ps) -> pictures
-        ( color white (drawBox p world)
-        : map (\ x -> color white (drawBox x world)) ps
+        ( color green (drawBox p world)
+        : map (\ x -> color green (drawBox x world)) ps
         )
     _ -> blank
 
@@ -94,8 +92,8 @@ drawPause world = if isOver world
     then blank
     else if isPaused world
     then pictures
-        [ color red  (translate (-110) (-0)(scale 0.3 0.3 (text "Paused")))
-        , color blue (translate (-150) (-50) (scale 0.1 0.1 (text ("Press P to unpause"))))
+        [ color red  (translate (-90) (-0)(scale 0.3 0.3 (text "Paused")))
+        , color blue (translate (-150) (-50) (scale 0.2 0.2 (text ("Press 'p' to unpause"))))
         ]
     else blank 
 
@@ -109,6 +107,7 @@ handleKeys (EventKey (SpecialKey KeyLeft) Down _ _) world = world { direction = 
 handleKeys (EventKey (SpecialKey KeyUp) Down _ _) world = world { direction = SnakeUp}
 handleKeys (EventKey (SpecialKey KeyDown) Down _ _) world = world { direction = SnakeDown}
 handleKeys (EventKey (Char 'p') Down _ _) world = world {direction = SnakeStoped, isPaused = not (isPaused world)}
+handleKeys (EventKey (Char 'n') Down _ _) world = world { snake = [(0, 2), (0, 1), (0, 0)], isOver = False, direction = SnakeUp }
 handleKeys _ world = world
 
 data World = NewWorld
