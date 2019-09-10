@@ -123,13 +123,15 @@ input :: Event -> Estados -> Estados
 input (EventKey (Char 's') Down _ _) game = if (nComida game) > 0 then sacrificio game else game
 input (EventKey (Char 'b') Down _ _) game = if (energia game) > 0 then  brincar game else game
 input (EventKey (Char 'c') Down _ _) game = if (nRemedio game) > 0 then cura game else game
+input (EventKey (Char 'r') Down _ _) game = estadoInicial
+
 input _ game = game
 
 atualizaJogo :: Float -> Estados -> Estados
 atualizaJogo segundos game = atualizaCont segundos game
 
 atualizaCont :: Float -> Estados -> Estados 
-atualizaCont  segundos  game = game {contador = x, fome = fm, satisfacao = s, energia = e, pupila = p, boca = b, nComida = nc, nRemedio = nr}
+atualizaCont  segundos  game = game {contador = x, fome = fm, satisfacao = s, energia = e, pupila = p, boca = b, nComida = nc, nRemedio = nr, forca = fc}
         where
             fm | ((contador game) >= 20 && (contador game) <= 20.1) || ((contador game) >= 40  && (contador game) <= 40.1) = (fome game) - 20
                | (fome game ) <= 0                                                   = 0
@@ -138,6 +140,9 @@ atualizaCont  segundos  game = game {contador = x, fome = fm, satisfacao = s, en
               | otherwise                                                            = (contador game) + segundos
             s | (contador game) >= 20  && (contador game) <= 20.1 &&(fome game) <= 0 = (satisfacao game) - 12
               | otherwise                                                            = (satisfacao game)
+            fc | (contador game) >= 20  && (contador game) <= 20.1 &&(fome game) <= 0 || ((contador game) >= 40  && (contador game)  <= 40.1 && (fome game) <= 0)  = (forca game) - 13
+               | (forca game) <= 0                                                    = 0
+               | otherwise                                                            = (forca game)
             e | (contador game) >= 20  && (contador game) <= 20.1 && (fome game) > 0 = (energia game) + 10
               | (energia game) >= 100                                                = 100
               | otherwise                                                            = (energia game)
