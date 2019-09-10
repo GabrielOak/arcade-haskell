@@ -13,6 +13,13 @@ A linguagem haskell é uma linguagem puramente funcional e foi utilizada para a 
 ### Pacotes Externos	
 Para elaborar a interface dos jogos nosso grupo optou por utilizar o Gloss, que é uma biblioteca de criar gráficos 2D, que também oferece funções de animação e simulação, que foram usadas para atualizar o estado do jogo. Para o download e integração do Gloss no projeto foi usado o Cabal, que é um gerenciador de bibliotecas e programas feitos em Haskell.
 
+
+### Execução
+
+Para executar um jogo, entre na pasta do jogo que deseja jogar, e execute o comando "cabal run".
+A versão utilizada do cabal no projeto é: 3.0.0.0
+Caso seja necessário, execute "cabal install pacote" para instalar os necessárias.
+
 ## Jogo 1 - Pong
 
 Pong é um jogo multiplayer que simula o “Ténis de mesa” que surgiu na Inglaterra no século XIX, o jogo consiste em dois jogadores cada jogador tem uma ferramenta, e uma bola, quando a bola passa do jogador o adversário marca pontos. para iniciar e aprender a linguagem o grupo se baseou em um artigo sobre o uso das ferramentas e desenhar na tela o básico de um pong, o diferencial foi implementar os movimentos, melhorar o visual, criar menus e melhorar a jogabilidade, o artigo citado está nas referências.
