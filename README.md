@@ -107,6 +107,10 @@ os arquivos estão separados por pastas para  executar o respectivo jogo, entre 
     cabal && cabal run  
     
 além dos jogos temos um menu principal que o grupo se comprometeu a fazer e teve problemas para integrar todos os módulos funcionais, resolvendo deixá-los separados.
+caso seja necessário para limpar os arquivos executaveis, utilize:
+    
+        cabal clean
+        
 
 
 Referências:
