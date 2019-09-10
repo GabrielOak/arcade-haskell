@@ -90,7 +90,23 @@ Snake é o jogo clássico, lançado em 1976. É popularmente conhecido, no Brasi
 **Seta para esquerda** - Movimenta a cobra para esquerda  
 **Seta para direita** - Movimenta a cobra para a direita  
 **P** - Pausa o jogo  
-**N** - Inicia um novo jogo   
+**N** - Inicia um novo jogo  
+
+## Cabal
+Os integrantes do grupo apresentaram problemas na instalação e uso do cabal, e de outras dependências por isso o time guardou os comandos que funcionam na instalação das dependências em um shell script focado no ubuntu 18.04 para auxiliar quem quiser rodar o projeto. o script se encontra na raiz do projeto Script.
+
+para executar o script no ubuntu 18.04 segue os comandos:
+
+    chmod +x simple_cabal_haskell_environment_ubuntu18-04.sh
+
+    ./simple_cabal_haskell_environment_ubuntu18-04.sh
+
+## Execução
+os arquivos estão separados por pastas para  executar o respectivo jogo, entre na pasta e use o comando 
+
+    cabal && cabal run  
+    
+além dos jogos temos um menu principal que o grupo se comprometeu a fazer e teve problemas para integrar todos os módulos funcionais, resolvendo deixá-los separados.
 
 
 Referências:
