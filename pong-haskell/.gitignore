@@ -1,4 +1,8 @@
-dist-newstyle
-stack.yaml.lock
-.stack-work
+dist
+dist-*
+cabal-dev
+.cabal-sandbox/
+cabal.sandbox.config
+.stack-work/
 cabal.project.local
+cabal.project.local~
