@@ -20,7 +20,7 @@ background = black
 
 -- Janela do jogo
 window :: Display
-window = InWindow "Menu" (width,height) (offset, offset)
+window = FullScreen
 
 renderText :: Float -> Float -> Float -> Float-> Color -> String -> Picture
 renderText x y h w cor umaString = translate (x) (y) $ scale h w $ color cor $ text umaString 

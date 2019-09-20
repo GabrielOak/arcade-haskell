@@ -9,7 +9,7 @@ import PongMovement
 import PongEventHandler
 
 window :: Display
-window = InWindow "Pong" (width, heigth) (screenOffset, screenOffset)
+window = FullScreen
 
 fps :: Int
 fps = 60
